@@ -1,4 +1,4 @@
-/* speex_types.h taken from libogg */
+/* speexdsp_types.h taken from libogg */
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -16,7 +16,7 @@
 
  ********************************************************************/
 /**
-   @file speex_types.h
+   @file speexdsp_types.h
    @brief Speex types
 */
 #ifndef _SPEEX_TYPES_H
@@ -48,78 +48,18 @@
      typedef unsigned __int16 spx_uint16_t;
 #  endif
 
-#elif defined(__MACOS__)
-
-#  include <sys/types.h>
-   typedef SInt16 spx_int16_t;
-   typedef UInt16 spx_uint16_t;
-   typedef SInt32 spx_int32_t;
-   typedef UInt32 spx_uint32_t;
-
-#elif (defined(__APPLE__) && defined(__MACH__)) /* MacOS X Framework build */
+#elif (defined(__APPLE__) && defined(__MACH__)) /* MacOS X build */
 
 #  include <sys/types.h>
    typedef int16_t spx_int16_t;
    typedef u_int16_t spx_uint16_t;
    typedef int32_t spx_int32_t;
    typedef u_int32_t spx_uint32_t;
-
-#elif defined(__BEOS__)
-
-   /* Be */
-#  include <inttypes.h>
-   typedef int16_t spx_int16_t;
-   typedef u_int16_t spx_uint16_t;
-   typedef int32_t spx_int32_t;
-   typedef u_int32_t spx_uint32_t;
-
-#elif defined (__EMX__)
-
-   /* OS/2 GCC */
-   typedef short spx_int16_t;
-   typedef unsigned short spx_uint16_t;
-   typedef int spx_int32_t;
-   typedef unsigned int spx_uint32_t;
-
-#elif defined (DJGPP)
-
-   /* DJGPP */
-   typedef short spx_int16_t;
-   typedef int spx_int32_t;
-   typedef unsigned int spx_uint32_t;
-
-#elif defined(R5900)
-
-   /* PS2 EE */
-   typedef int spx_int32_t;
-   typedef unsigned spx_uint32_t;
-   typedef short spx_int16_t;
-
-#elif defined(__SYMBIAN32__)
-
-   /* Symbian GCC */
-   typedef signed short spx_int16_t;
-   typedef unsigned short spx_uint16_t;
-   typedef signed int spx_int32_t;
-   typedef unsigned int spx_uint32_t;
-
-#elif defined(CONFIG_TI_C54X) || defined (CONFIG_TI_C55X)
-
-   typedef short spx_int16_t;
-   typedef unsigned short spx_uint16_t;
-   typedef long spx_int32_t;
-   typedef unsigned long spx_uint32_t;
-
-#elif defined(CONFIG_TI_C6X)
-
-   typedef short spx_int16_t;
-   typedef unsigned short spx_uint16_t;
-   typedef int spx_int32_t;
-   typedef unsigned int spx_uint32_t;
 
 #else
 
-#  include <speex/speex_config_types.h>
+// Removed other platforms, as this won't be used on them
+#  error "Unexpected Platform"
 
 #endif
 
