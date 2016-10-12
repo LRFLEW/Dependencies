@@ -45,12 +45,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\bin\</OutDir>
     <IntDir>$(SolutionDir)\obj\</IntDir>
-    <IncludePath>$(SolutionDir)..\jansson\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\jansson\src;..\jansson\win;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\bin\</OutDir>
     <IntDir>$(SolutionDir)\obj\</IntDir>
-    <IncludePath>$(SolutionDir)..\jansson\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\jansson\src;..\jansson\win;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -101,12 +101,12 @@
   <ItemGroup>
     <ClInclude Include="..\jansson\src\hashtable.h" />
     <ClInclude Include="..\jansson\src\jansson.h" />
-    <ClInclude Include="..\jansson\src\jansson_config.h" />
     <ClInclude Include="..\jansson\src\jansson_private.h" />
-    <ClInclude Include="..\jansson\src\jansson_private_config.h" />
     <ClInclude Include="..\jansson\src\lookup3.h" />
     <ClInclude Include="..\jansson\src\strbuffer.h" />
     <ClInclude Include="..\jansson\src\utf.h" />
+    <ClInclude Include="..\jansson\win\jansson_config.h" />
+    <ClInclude Include="..\jansson\win\jansson_private_config.h" />
     <ClInclude Include="..\libspeex\arch.h" />
     <ClInclude Include="..\libspeex\config.h" />
     <ClInclude Include="..\libspeex\os_support.h" />

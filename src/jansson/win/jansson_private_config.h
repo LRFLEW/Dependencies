@@ -1,7 +1,3 @@
-#if _MSC_VER >= 1900
-#define HAVE_SNPRINTF
-#endif
-
 /* #undef HAVE_ENDIAN_H */
 #define HAVE_FCNTL_H 1
 /* #undef HAVE_SCHED_H */
@@ -51,13 +47,7 @@
 #  define ssize_t int
 #endif
 
-/* #undef HAVE_SNPRINTF */
-
-#ifndef HAVE_SNPRINTF
-#  define snprintf _snprintf
-#endif
-
-/* #undef HAVE_VSNPRINTF */
-
 #define USE_URANDOM 1
 #define USE_WINDOWS_CRYPTOAPI 1
+
+#define INITIAL_HASHTABLE_ORDER 3

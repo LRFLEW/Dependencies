@@ -1,5 +1,5 @@
 AC_PREREQ([2.60])
-AC_INIT([jansson], [2.7], [petri@digip.org])
+AC_INIT([jansson], [2.9], [petri@digip.org])
 
 AC_CONFIG_AUX_DIR([.])
 AM_INIT_AUTOMAKE([1.10 foreign])
@@ -33,7 +33,7 @@ esac
 AC_SUBST([json_inline])
 
 # Checks for library functions.
-AC_CHECK_FUNCS([close getpid gettimeofday localeconv open read strtoll])
+AC_CHECK_FUNCS([close getpid gettimeofday localeconv open read sched_yield strtoll])
 
 AC_MSG_CHECKING([for gcc __sync builtins])
 have_sync_builtins=no
@@ -91,6 +91,13 @@ if test "x$use_windows_cryptoapi" = xyes; then
 AC_DEFINE([USE_WINDOWS_CRYPTOAPI], [1],
   [Define to 1 if CryptGenRandom should be used for seeding the hash function])
 fi
+
+AC_ARG_ENABLE([initial-hashtable-order],
+  [AS_HELP_STRING([--enable-initial-hashtable-order=VAL],
+    [Number of buckets new object hashtables contain is 2 raised to this power. The default is 3, so empty hashtables contain 2^3 = 8 buckets.])],
+  [initial_hashtable_order=$enableval], [initial_hashtable_order=3])
+AC_DEFINE_UNQUOTED([INITIAL_HASHTABLE_ORDER], [$initial_hashtable_order],
+  [Number of buckets new object hashtables contain is 2 raised to this power. E.g. 3 -> 2^3 = 8.])
 
 if test x$GCC = xyes; then
     AM_CFLAGS="-Wall -Wextra -Wdeclaration-after-statement"
