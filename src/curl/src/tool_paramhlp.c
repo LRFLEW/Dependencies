@@ -5,11 +5,11 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2015, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
- * are also available at http://curl.haxx.se/docs/copyright.html.
+ * are also available at https://curl.haxx.se/docs/copyright.html.
  *
  * You may opt to use, copy, modify, merge, publish, distribute and/or sell
  * copies of the Software, and permit persons to whom the Software is
@@ -284,6 +284,8 @@ long proto2num(struct OperationConfig *config, long *val, const char *str)
   if(!buffer)
     return 1;
 
+  /* Allow strtok() here since this isn't used threaded */
+  /* !checksrc! disable BANNEDFUNC 2 */
   for(token = strtok(buffer, sep);
       token;
       token = strtok(NULL, sep)) {
@@ -336,6 +338,27 @@ long proto2num(struct OperationConfig *config, long *val, const char *str)
   }
   Curl_safefree(buffer);
   return 0;
+}
+
+/**
+ * Check if the given string is a protocol supported by libcurl
+ *
+ * @param str  the protocol name
+ * @return PARAM_OK  protocol supported
+ * @return PARAM_LIBCURL_UNSUPPORTED_PROTOCOL  protocol not supported
+ * @return PARAM_REQUIRES_PARAMETER   missing parameter
+ */
+int check_protocol(const char *str)
+{
+  const char * const *pp;
+  const curl_version_info_data *curlinfo = curl_version_info(CURLVERSION_NOW);
+  if(!str)
+    return PARAM_REQUIRES_PARAMETER;
+  for(pp = curlinfo->protocols; *pp; pp++) {
+    if(curlx_raw_equal(*pp, str))
+      return PARAM_OK;
+  }
+  return PARAM_LIBCURL_UNSUPPORTED_PROTOCOL;
 }
 
 /**
@@ -405,7 +428,7 @@ static CURLcode checkpasswd(const char *kind, /* for what purpose */
       curlx_msnprintf(prompt, sizeof(prompt),
                       "Enter %s password for user '%s' on URL #%"
                       CURL_FORMAT_CURL_OFF_TU ":",
-                      kind, *userpwd, i + 1);
+                      kind, *userpwd, (curl_off_t) (i + 1));
 
     /* get password */
     getpass_r(prompt, passwd, sizeof(passwd));
@@ -498,7 +521,7 @@ CURLcode get_args(struct OperationConfig *config, const size_t i)
   bool last = (config->next ? FALSE : TRUE);
 
   /* Check we have a password for the given host user */
-  if(config->userpwd && !config->xoauth2_bearer) {
+  if(config->userpwd && !config->oauth_bearer) {
     result = checkpasswd("host", i, last, &config->userpwd);
     if(result)
       return result;

@@ -138,8 +138,8 @@ if ($buildOpenSSL)
 
 # Build libcurl
 Write-Host "Building libcurl..." -ForegroundColor Cyan
-msbuild ".\src\curl\projects\Windows\VC12\lib\libcurl.sln" "/p:Configuration=LIB Release - DLL Windows SSPI" "/p:Platform=x64" "/p:PlatformToolset=v140" "/v:minimal"
-Copy-Item -Force ".\src\curl\build\Win64\VC12\LIB Release - DLL Windows SSPI\libcurl.lib" $binDir
+msbuild ".\src\curl\projects\Windows\VC14\lib\libcurl.sln" "/p:Configuration=LIB Release - DLL Windows SSPI" "/p:Platform=x64" "/p:PlatformToolset=v140" "/v:minimal"
+Copy-Item -Force ".\src\curl\build\Win64\VC14\LIB Release - DLL Windows SSPI\libcurl.lib" $binDir
 
 Write-Host "-----------------------------------------------------" -ForegroundColor Cyan
 
