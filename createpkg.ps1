@@ -64,7 +64,7 @@ CopyHeaders ".\src\jansson\src\jansson.h"                                "jansso
 Copy-Item   ".\src\jansson\win\jansson_config.h"                         "$includeDir\jansson"
 CopyHeaders ".\src\libspeex\speex\*.h"                                   "libspeex\speex"
 CopyHeaders ".\src\curl\include\curl\*.h"                                "curl"
-CopyHeaders ".\src\openssl\inc32\openssl\*.h"                            "openssl"
+CopyHeaders ".\src\openssl\include\openssl\*.h"                            "openssl"
 
 Write-Host "-----------------------------------------------------" -ForegroundColor Cyan
 

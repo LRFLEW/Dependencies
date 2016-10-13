@@ -121,7 +121,7 @@ if ($buildOpenSSL)
 	& ".\build_openssl.bat"
 } else {
 	# Download OpenSSL
-	$opensslVersion = "1.0.2h"
+	$opensslVersion = "1.0.2j"
 	$opensslDownloadUrl = "http://www.npcglib.org/~stathis/downloads/openssl-$opensslVersion-vs2015.7z"
 	$opensslDownloadOut = ".\openssl-precompiled.7z"
 	if (-not (Test-Path -PathType Leaf $opensslDownloadOut))
@@ -132,6 +132,7 @@ if ($buildOpenSSL)
 		Remove-Item -Force -Recurse ".\src\openssl" -ErrorAction SilentlyContinue
 		7z x $opensslDownloadOut -osrc | Write-Host
 		Copy-Item -Force "$extractDir\lib64\libeay32MT.lib" "$binDir/libeay32.lib"
+		Move-Item $extractDir ".\src\openssl"
 	}
 }
 
