@@ -43,8 +43,11 @@
         {
             "name": "breakpad",
             "version": "2022-07-12#5"
+        },
+        {
+            "name": "nlohmann-json",
+            "version": "3.11.3#1"
         }
     ],
-    "builtin-baseline":"68d349964cb4e8da561fd849d9491e6ba11c5681"
-
+    "builtin-baseline": "ef7dbf94b9198bc58f45951adcf1f041fcbc5ea0"
 }
